@@ -206,3 +206,16 @@ if (peel) {
     ];
   }, 5000);
 }
+
+// The footer hint also opens by tap or keyboard, without navigating away.
+const intakeInfo = document.querySelector('.intake-info');
+const intakeTip = document.querySelector('#intake-tooltip');
+if (intakeInfo && intakeTip) {
+  const showTip = open => { intakeTip.hidden = !open; intakeInfo.setAttribute('aria-expanded', String(open)); };
+  intakeInfo.addEventListener('click', () => showTip(intakeTip.hidden));
+  intakeInfo.addEventListener('mouseenter', () => { if (matchMedia('(hover: hover)').matches) showTip(true); });
+  intakeInfo.addEventListener('mouseleave', () => { if (document.activeElement !== intakeInfo) showTip(false); });
+  intakeInfo.addEventListener('blur', () => showTip(false));
+  intakeInfo.addEventListener('keydown', event => { if (event.key === 'Escape') showTip(false); });
+  document.addEventListener('pointerdown', event => { if (!event.target.closest('.intake-link-group')) showTip(false); });
+}

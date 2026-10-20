@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f0e9">
+  <meta name="description" content="Tell Christina about your treatment interests and beauty goals at Elevated Ink & Aesthetics in Scottsdale.">
+  <title>Your first visit · Elevated Ink & Aesthetics</title>
+  <link rel="preload" href="assets/fonts/italiana.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/fonts/dm-sans-regular.woff" as="font" type="font/woff" crossorigin>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20261020-new-client">
+  <link rel="stylesheet" href="intake.css?v=1">
+  <script src="new-client.js?v=1" defer></script>
+</head>
+<body class="intake-page">
+<a class="skip" href="#intake-main">Skip to form</a>
+<header class="header frame intake-header"><a class="wordmark" href="./" aria-label="Elevated Ink and Aesthetics home">ELEVATED INK<span>& AESTHETICS</span></a><a class="header-contact" href="./"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>Back to studio</a></header>
+<main class="intake-layout frame" id="intake-main">
+  <aside class="intake-welcome" aria-label="A personal welcome">
+    <h1>A little<br> about you.</h1>
+    <p>Your goals. Your pace.<br> A first step that feels like you.</p>
+    <picture><source type="image/webp" srcset="assets/christina-480.webp 480w, assets/christina-960.webp 960w" sizes="(max-width: 760px) 100px, 340px"><img src="assets/christina-cutout.png" alt="Christina, your artist at Elevated Ink" width="1165" height="1350" decoding="async"></picture>
+    <div class="intake-welcome-note"><strong>Good things start with a conversation.</strong><span>Tell Christina what you have in mind. She’ll help you explore your options.</span></div>
+  </aside>
+  <section class="intake-shell" aria-label="New client form">
+    <div class="intake-progress-meta"><span id="intake-step-count">Step 1 of 4</span><span id="intake-step-name">Your interests</span></div>
+    <div class="intake-progress" role="progressbar" aria-label="Form progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-valuetext="Step 1 of 4: Your interests"><span class="intake-progress-fill"></span></div>
+    <form id="new-client-form" novalidate>
+      <fieldset class="intake-panel" data-panel="0">
+        <legend>What brings you in?</legend>
+        <p class="intake-prompt">Choose anything you’re curious about.</p>
+        <div class="intake-choices interests">
+          <label class="intake-choice"><input type="checkbox" name="interest" value="Brows"><span><strong>Brows</strong><small>Shape, softness & definition</small></span></label>
+          <label class="intake-choice"><input type="checkbox" name="interest" value="Lips"><span><strong>Lips</strong><small>A little color, beautifully you</small></span></label>
+          <label class="intake-choice"><input type="checkbox" name="interest" value="Skin care"><span><strong>Skin</strong><small>Care for your natural glow</small></span></label>
+          <label class="intake-choice"><input type="checkbox" name="interest" value="Restorative tattooing"><span><strong>Restorative artistry</strong><small>Scar & areola tattooing</small></span></label>
+          <label class="intake-choice"><input type="checkbox" name="interest" value="Yoga, meditation or sound healing"><span><strong>A moment of calm</strong><small>Yoga, meditation & sound</small></span></label>
+          <label class="intake-choice"><input type="checkbox" name="interest" value="Tiny tattoos, freckles, piercings or tooth gems"><span><strong>Little details</strong><small>Tiny tattoos, freckles, piercings & gems</small></span></label>
+          <label class="intake-choice"><input type="checkbox" name="interest" value="Still exploring"><span><strong>Help me decide</strong><small>Let’s find your starting point</small></span></label>
+        </div>
+      </fieldset>
+      <fieldset class="intake-panel" data-panel="1">
+        <legend>What would feel like you?</legend>
+        <p class="intake-prompt">Pick the goals that matter most.</p>
+        <div class="intake-choices goal-choices">
+          <label class="intake-choice"><input type="checkbox" name="goal" value="Soft and natural"><span>Soft & natural</span></label>
+          <label class="intake-choice"><input type="checkbox" name="goal" value="More definition"><span>More definition</span></label>
+          <label class="intake-choice"><input type="checkbox" name="goal" value="Simpler mornings"><span>Simpler mornings</span></label>
+          <label class="intake-choice"><input type="checkbox" name="goal" value="Renewed confidence"><span>Renewed confidence</span></label>
+          <label class="intake-choice"><input type="checkbox" name="goal" value="Time for myself"><span>Time for myself</span></label>
+          <label class="intake-choice"><input type="checkbox" name="goal" value="Guidance from Christina"><span>A little guidance</span></label>
+        </div>
+        <label class="intake-field" for="client-timing"><span>When are you thinking?</span><select id="client-timing" name="timing"><option>Just exploring</option><option>This month</option><option>In the next 1–3 months</option><option>For an upcoming occasion</option></select></label>
+        <label class="intake-field" for="client-notes"><span>Your vision <small>Optional</small></span><textarea id="client-notes" name="notes" rows="3" maxlength="400" placeholder="A look you love, a detail you’d like to change, or a question for Christina…"></textarea></label>
+      </fieldset>
+      <fieldset class="intake-panel" data-panel="2">
+        <legend>Let’s make it personal.</legend>
+        <p class="intake-prompt">How should Christina get back to you?</p>
+        <label class="intake-field" for="client-name"><span>Your name</span><input id="client-name" name="name" autocomplete="name" maxlength="80" required placeholder="First and last name"></label>
+        <label class="intake-field" for="client-phone"><span>Phone number</span><input id="client-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" required placeholder="(602) 555-0123"></label>
+        <div class="intake-field-pair">
+          <label class="intake-field" for="client-reply"><span>Preferred reply</span><select id="client-reply" name="reply"><option>Text me</option><option>WhatsApp</option><option>Call me</option></select></label>
+          <label class="intake-field" for="client-referral"><span>How did you find us? <small>Optional</small></span><select id="client-referral" name="referral"><option value="">Choose one</option><option>Google</option><option>Instagram</option><option>Facebook</option><option>A friend</option><option>Other</option></select></label>
+        </div>
+        <label class="intake-optin"><input type="checkbox" name="updates"><span>I’d like occasional studio news and offers.<small>Optional. You can inquire without opting in.</small></span></label>
+      </fieldset>
+      <section class="intake-panel intake-review" data-panel="3" aria-labelledby="intake-review-title" hidden>
+        <h2 id="intake-review-title">Your next chapter starts here.</h2>
+        <p class="intake-prompt">Here’s your note to Christina. Make it yours before sending.</p>
+        <dl id="intake-summary"></dl>
+        <p class="intake-delivery-note">Your answers open as a draft in your messaging app. Review and send it there to reach Christina.</p>
+        <a class="intake-primary intake-send" id="intake-send" href="sms:+16027063400">Open text draft <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 19 14-14M5 5h14v14"/></svg></a>
+        <button class="intake-copy" type="button" id="intake-copy">Copy my request instead</button>
+        <p class="intake-handoff" id="intake-handoff" role="status"></p>
+      </section>
+      <p class="intake-error" id="intake-error" role="alert" hidden></p>
+      <div class="intake-navigation" hidden><button type="button" class="intake-back" id="intake-back">Back</button><button type="button" class="intake-primary" id="intake-next">Continue <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button></div>
+      <noscript><p class="intake-delivery-note">For guided steps, enable JavaScript. You can also <a href="sms:+16027063400">text Christina directly</a> about your goals.</p></noscript>
+    </form>
+    <p class="intake-help">Rather talk it through? <a href="tel:+16027063400">Call Christina</a></p>
+  </section>
+</main>
+<footer class="intake-page-footer frame"><span>Elevated Ink & Aesthetics · Scottsdale, AZ</span><a href="./#location">Find the studio <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 19 14-14M5 5h14v14"/></svg></a></footer>
+</body>
+</html>
