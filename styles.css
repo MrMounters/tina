@@ -4,6 +4,9 @@
 /* Italiana has one native weight. Reinforce its fine strokes without changing
    the approved letterforms, spacing or line breaks, including intake titles. */
 h1,h2,h3,h4,h5,h6,.intake-panel legend{-webkit-text-stroke:.35px currentColor}
+.credential-verify{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:4px;color:var(--brass);font-size:var(--small);line-height:1.4;text-decoration:underline;text-underline-offset:4px}
+.credential-verify .icon{width:14px;height:14px}
+.credential-verify:hover{text-decoration-thickness:2px}
 /* A compact service grid, with an enhanced category selector. */
 .treatment-menu{margin-top:32px}
 .treatment-filters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;padding:8px;background:var(--field);border-radius:12px}

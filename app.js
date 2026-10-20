@@ -5,7 +5,7 @@ if (year) year.textContent = String(new Date().getFullYear());
 const dock = document.querySelector('.contact-dock');
 const contact = document.querySelector('#contact');
 if (dock && contact) {
-  const protectedContent = [...document.querySelectorAll('h1,h2,.button,summary,.services a,.treatment-category-heading,.treatment-filters button,.service-help a')].filter(node => !dock.contains(node));
+  const protectedContent = [...document.querySelectorAll('h1,h2,.button,summary,.services a,.treatment-category-heading,.treatment-filters button,.service-help a,.credential-verify')].filter(node => !dock.contains(node));
   let dockBounds;
   let queued = false;
   function measureDock() {
