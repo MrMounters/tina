@@ -32,3 +32,10 @@ Official verification: https://bcb.az.gov/resources/license-verification
 The user requested removal of the demo wording. The public page now contains the existing Google rating and count, confirmed Scottsdale studio address, and confirmed contact number. The fictional license, unverified 8+ years claim, and sample training affiliations were removed along with the demo disclosures. Actual professional credentials can be added once supplied and checked.
 
 The studio portrait has neutral descriptive alt text and no visible concept caption. Its generated provenance remains documented internally in messaging-location-release.md. Social account URLs are still pending the next prompt.
+
+
+## Supplied social profiles and stated qualifications
+
+The user supplied Facebook and Google redirect links. The Facebook share resolves to https://www.facebook.com/az.inkandaesthetics/ (page title: AZ lashes and microblading, Scottsdale AZ). The Google redirect resolves to https://www.instagram.com/inkandaestheticsbykellee/. Both are now linked directly. Messenger uses the Facebook page handle at https://m.me/az.inkandaesthetics. Messages and WhatsApp use the confirmed phone number. The footer includes all four messaging channels, plus a Facebook navigation link.
+
+The footer now includes “Licensed esthetician,” “Laser technician” and “Permanent makeup specialist,” taken from Christina’s original business-site bio. These are business-stated qualifications, not an independent license verification. No license number or institutional accreditation is claimed; the real details are still requested.

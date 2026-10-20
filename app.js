@@ -17,7 +17,7 @@ if (dock && contact) {
   }
   function updateDock() {
     queued = false;
-    if (dock.contains(document.activeElement) || !dockBounds) return;
+    if (dock.querySelector(':focus-visible') || dock.querySelector('.messaging-peel.is-open') || !dockBounds) return;
     const contactBox = contact.getBoundingClientRect();
     const contactVisible = contactBox.top < innerHeight * 0.8 && contactBox.bottom > 0;
     const collision = protectedContent.some(node => {
@@ -133,7 +133,7 @@ fetch('contact-config.json').then(response => {
   }
 }).catch(() => { /* Direct text and WhatsApp are already in the HTML. */ });
 
-// Only the floating control peeks: a 16px hint, then back, every five seconds.
+// Only the floating control peeks at the social icons, then closes, every five seconds.
 // Messaging options open only on request; a peek never changes focus or semantics.
 const peel = document.querySelector('.contact-dock .messaging-peel');
 if (peel) {
@@ -175,18 +175,26 @@ if (peel) {
   setInterval(() => {
     stopPeek();
     if (motionPreference.matches || document.hidden || dock.hidden ||
-        peel.classList.contains('is-open') || dock.contains(document.activeElement) ||
-        peel.matches(':hover') || !peel.getClientRects().length) return;
+        peel.classList.contains('is-open') || dock.querySelector(':focus-visible') ||
+        (matchMedia('(hover: hover)').matches && peel.matches(':hover')) || !peel.getClientRects().length) return;
     const bounds = peel.getBoundingClientRect();
     if (bounds.bottom <= 0 || bounds.top >= innerHeight) return;
-    const keyframes = [
-      { transform: 'translateX(0)', offset: 0 },
-      { transform: 'translateX(-16px)', offset: .42 },
-      { transform: 'translateX(-16px)', offset: .58 },
-      { transform: 'translateX(0)', offset: 1 }
+    // Clip only the cover's edge: the label stays still and legible while two
+    // small social marks peek out. Touch focus never blocks the next cycle.
+    const room = peel.clientWidth - face.querySelector('span').getBoundingClientRect().width - 24;
+    const distance = Math.max(36, Math.min(52, room));
+    const timing = { duration: 900, easing: 'ease-in-out', iterations: 1 };
+    peekAnimations = [
+      face.animate([
+        { clipPath: 'inset(0 0px 0 0 round 28px)', offset: 0 },
+        { clipPath: `inset(0 ${distance}px 0 0 round 28px)`, offset: .38 },
+        { clipPath: `inset(0 ${distance}px 0 0 round 28px)`, offset: .62 },
+        { clipPath: 'inset(0 0px 0 0 round 28px)', offset: 1 }
+      ], timing),
+      toggle.animate([
+        { opacity: 1, offset: 0 }, { opacity: 0, offset: .25 },
+        { opacity: 0, offset: .75 }, { opacity: 1, offset: 1 }
+      ], timing)
     ];
-    peekAnimations = [face, toggle].map(node => node.animate(keyframes, {
-      duration: 850, easing: 'ease-in-out', iterations: 1
-    }));
   }, 5000);
 }

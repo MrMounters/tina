@@ -34,3 +34,8 @@ The exact production Google Maps iframe URL returns HTTP 200. External map conte
 Taste and Impeccable animation guidance informed the restrained one-time reveals and reduced-motion behavior. The pre-existing detector findings are documented in refinement-results.md; the latest Impeccable detector still flags the intentionally retained cream palette. No new all-clear claim is made for the full Taste inspector.
 
 Footer trust signals are proposed separately in footer-trust-plan.md. No unverified license, experience, accreditation or membership is added to the public site.
+
+
+## Social peek touch correction
+
+The former hover and active-element guards could suppress peeks after touch interaction. The timer now distinguishes desktop hover and keyboard-visible focus from touch focus. Each 5-second cycle briefly clips 36–52px of the closed cover to reveal two compact social icons over 900ms, then returns. The Text Christina label stays fixed. Manual opening remains a separate action. The reduced-motion and offscreen/hidden guards remain. All four tray and footer destinations now use the user-supplied profiles or confirmed phone number; Facebook and Instagram are no longer hidden. Styles and script URLs are versioned for this correction.
