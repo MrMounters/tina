@@ -2,6 +2,8 @@
 
 ## Current revision: service grid
 
+Latest compact revision: four columns at every viewport, including 320px and the iPhone 7's 375px width. Phone tiles use 24px icons, 100px minimum height, 6px gutters and compact service labels. Full original names remain available to screen readers and in structured data; desktop keeps the full labels. No repeated inquiry actions were restored.
+
 At the client's request, the treatment table and every repeated Ask link have been removed. The current layout is a semantic list grid: two columns on phones, three on tablets and four on desktop, grouped under the existing category headings. Each tile contains its original line icon and service name. Tiles are informational; the floating contact control and new-client form remain the shared ways to inquire. All 22 services, category filters, announced counts, incoming fragment links, no-JavaScript visibility and reduced-motion behavior remain.
 
 Checked at 320, 375, 768 and 1440px for grid columns, complete content, category counts, no horizontal overflow and no JavaScript errors. Mobile and desktop captures reviewed. Earlier table-specific implementation notes below describe the superseded version.
