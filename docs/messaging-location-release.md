@@ -39,3 +39,12 @@ Footer trust signals are proposed separately in footer-trust-plan.md. No unverif
 ## Social peek touch correction
 
 The former hover and active-element guards could suppress peeks after touch interaction. The timer now distinguishes desktop hover and keyboard-visible focus from touch focus. Each 5-second cycle briefly clips 36–52px of the closed cover to reveal two compact social icons over 900ms, then returns. The Text Christina label stays fixed. Manual opening remains a separate action. The reduced-motion and offscreen/hidden guards remain. All four tray and footer destinations now use the user-supplied profiles or confirmed phone number; Facebook and Instagram are no longer hidden. Styles and script URLs are versioned for this correction.
+
+
+## Business-specific Google map and footer branding
+
+The former address-only embed resolved to a suite/location entity, not the business. The corrected map targets Google business CID 10707652014736589159 and place ID ChIJVWpZWmMLK4cRZ8HenMY4mZQ. Google’s live embed payload identifies “Az ink and aesthetics” at 6895 E Camelback Rd #114, Scottsdale, with rating 5 and 26 reviews; it also matches the supplied Google knowledge ID /g/11t7lrrl_n. Directions target that exact place ID.
+
+The map has an ivory business-name header, brass pin, subtle border and rounded frame. The Google map content and attribution remain unobscured, with its native colors and interactions retained. A compact multicolor Google G now accompanies the footer rating. Google controls the business card content; its phone number currently differs from the confirmed 602 number used in the site contact buttons.
+
+Validation for the map update: Chromium at 320, 390 and 1440px loaded the real Google embed, with map tiles and attribution. The iframe payload contains the exact business name, verified place ID and matching address. Screenshots show the named business pin on phones and the full name/address/5.0/26-review card at desktop width. Google uses a compact native card on narrow screens; the custom business-name header remains visible at all widths. No horizontal overflow. Footer Google mark uses four brand colors and renders at 18px. No map layers, attribution or native controls were covered or restyled.
