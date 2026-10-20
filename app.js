@@ -5,7 +5,7 @@ if (year) year.textContent = String(new Date().getFullYear());
 const dock = document.querySelector('.contact-dock');
 const contact = document.querySelector('#contact');
 if (dock && contact) {
-  const protectedContent = [...document.querySelectorAll('h1,h2,.button,summary,.services a')].filter(node => !dock.contains(node));
+  const protectedContent = [...document.querySelectorAll('h1,h2,.button,summary,.services a,.treatment-inquiry,.treatment-filters button,.service-help a')].filter(node => !dock.contains(node));
   let dockBounds;
   let queued = false;
   function measureDock() {
@@ -21,6 +21,7 @@ if (dock && contact) {
     const contactBox = contact.getBoundingClientRect();
     const contactVisible = contactBox.top < innerHeight * 0.8 && contactBox.bottom > 0;
     const collision = protectedContent.some(node => {
+      if (node.closest('[data-service-group][hidden]')) return false;
       if (node.closest('.services') && !node.closest('details')?.open) return false;
       const r = node.getBoundingClientRect();
       return r.width > 0 && r.height > 0 && r.top < dockBounds.bottom + 8 &&
@@ -37,6 +38,48 @@ if (dock && contact) {
   document.addEventListener('toggle', scheduleUpdate, true);
   document.addEventListener('contactlayoutchange', measureDock);
   document.fonts?.ready.then(measureDock);
+}
+
+// The complete menu is HTML. Filters enhance it without hiding content on failure.
+const treatmentMenu = document.querySelector('.treatment-menu');
+if (treatmentMenu) {
+  const controls = treatmentMenu.querySelector('.treatment-filters');
+  const buttons = [...controls.querySelectorAll('[data-service-filter]')];
+  const groups = [...treatmentMenu.querySelectorAll('[data-service-group]')];
+  const status = treatmentMenu.querySelector('#treatment-count');
+  const chooseCategory = category => {
+    treatmentMenu.querySelector('table').classList.toggle('is-filtered', category !== 'all');
+    let count = 0;
+    groups.forEach(group => {
+      group.hidden = category !== 'all' && group.dataset.serviceGroup !== category;
+      if (!group.hidden) count += group.querySelectorAll('.treatment-row').length;
+    });
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.serviceFilter === category)));
+    status.textContent = `${count} treatments${category === 'all' ? '' : ` · ${buttons.find(button => button.dataset.serviceFilter === category).textContent}`}`;
+    document.dispatchEvent(new Event('contactlayoutchange'));
+  };
+  buttons.forEach(button => button.addEventListener('click', () => {
+    chooseCategory(button.dataset.serviceFilter);
+    history.replaceState(null, '', `#${button.dataset.serviceFilter === 'all' ? 'treatments' : button.dataset.serviceFilter}`);
+    // Keep focus on the selected control; the live count announces the result.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const visibleGroups = groups.filter(group => !group.hidden);
+      visibleGroups.forEach(group => group.animate([
+        {opacity: .65, transform: 'translateY(5px)'},
+        {opacity: 1, transform: 'translateY(0)'}
+      ], {duration: 220, easing: 'cubic-bezier(.16,1,.3,1)'}));
+    }
+  }));
+  // Existing service-category links also work after a different filter is selected.
+  const followCategory = () => {
+    const category = location.hash.slice(1);
+    if (!groups.some(group => group.id === category)) return;
+    chooseCategory(category);
+    document.getElementById(category).scrollIntoView({block: 'start', behavior: 'instant'});
+  };
+  controls.hidden = false;
+  followCategory();
+  addEventListener('hashchange', followCategory);
 }
 
 // Keep keyboard focus above the fixed contact controls.
