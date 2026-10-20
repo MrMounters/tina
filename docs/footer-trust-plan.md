@@ -39,3 +39,8 @@ The studio portrait has neutral descriptive alt text and no visible concept capt
 The user supplied Facebook and Google redirect links. The Facebook share resolves to https://www.facebook.com/az.inkandaesthetics/ (page title: AZ lashes and microblading, Scottsdale AZ). The Google redirect resolves to https://www.instagram.com/inkandaestheticsbykellee/. Both are now linked directly. Messenger uses the Facebook page handle at https://m.me/az.inkandaesthetics. Messages and WhatsApp use the confirmed phone number. The footer includes all four messaging channels, plus a Facebook navigation link.
 
 The footer now includes “Licensed esthetician,” “Laser technician” and “Permanent makeup specialist,” taken from Christina’s original business-site bio. These are business-stated qualifications, not an independent license verification. No license number or institutional accreditation is claimed; the real details are still requested.
+
+
+## Fuller credential presentation for client review
+
+The user supplied number 8823473232 and requested a fuller badge layout. Six custom line icons accompany licensed esthetician/number, insurance, yoga accreditation, laser technician, permanent makeup and restorative artistry. The latter practice areas come from the original bio and supplied service list. License, insurance and yoga credentials are expressly marked pending confirmation; no insurer, yoga school, accreditation body or institutional logo is fabricated. The exact license number is user-supplied and not independently verified.

@@ -48,3 +48,10 @@ The former address-only embed resolved to a suite/location entity, not the busin
 The map has an ivory business-name header, brass pin, subtle border and rounded frame. The Google map content and attribution remain unobscured, with its native colors and interactions retained. A compact multicolor Google G now accompanies the footer rating. Google controls the business card content; its phone number currently differs from the confirmed 602 number used in the site contact buttons.
 
 Validation for the map update: Chromium at 320, 390 and 1440px loaded the real Google embed, with map tiles and attribution. The iframe payload contains the exact business name, verified place ID and matching address. Screenshots show the named business pin on phones and the full name/address/5.0/26-review card at desktop width. Google uses a compact native card on narrow screens; the custom business-name header remains visible at all widths. No horizontal overflow. Footer Google mark uses four brand colors and renders at 18px. No map layers, attribution or native controls were covered or restyled.
+
+
+## Slower social reveal and closing shine
+
+The edge reveal now lasts 2400ms, retaining the five-second start cadence. Its cover opens gently, holds, then closes; a restrained 1050ms shine begins 2100ms into the cycle. The label stays still. Preview icons are 22px with 12px separation and more inset from the edge. Very narrow screens show one preview mark so the Text Christina label has room; manual opening still exposes all four messaging links with at least 44px targets. Both peek and shine stop for reduced motion, hidden/offscreen controls and user interaction.
+
+Verification: touch open/close followed by recurring five-second peeks; 2.4-second reveal; visible closing shine; measured preview clearance and opaque preview backing; six badge icons and supplied number; confirmation note; all four open-tray targets at least 44px and within the viewport at 320, 390, 768 and 1440px; reduced-motion disables both automatic effects.

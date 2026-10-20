@@ -141,6 +141,7 @@ if (peel) {
   const toggle = peel.querySelector('.peel-toggle');
   const tray = peel.querySelector('.messaging-tray');
   const face = peel.querySelector('.peel-face');
+  const shine = peel.querySelector('.cta-shine');
   const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
   let peekAnimations = [];
   const stopPeek = () => {
@@ -182,19 +183,26 @@ if (peel) {
     // Clip only the cover's edge: the label stays still and legible while two
     // small social marks peek out. Touch focus never blocks the next cycle.
     const room = peel.clientWidth - face.querySelector('span').getBoundingClientRect().width - 24;
-    const distance = Math.max(36, Math.min(52, room));
-    const timing = { duration: 900, easing: 'ease-in-out', iterations: 1 };
+    const desired = peel.querySelector('.peek-signals').getBoundingClientRect().width + 12;
+    const distance = Math.max(40, Math.min(desired, room));
+    const timing = { duration: 2400, easing: 'linear', iterations: 1 };
     peekAnimations = [
       face.animate([
-        { clipPath: 'inset(0 0px 0 0 round 28px)', offset: 0 },
-        { clipPath: `inset(0 ${distance}px 0 0 round 28px)`, offset: .38 },
-        { clipPath: `inset(0 ${distance}px 0 0 round 28px)`, offset: .62 },
+        { clipPath: 'inset(0 0px 0 0 round 28px)', offset: 0, easing: 'cubic-bezier(.45,0,.2,1)' },
+        { clipPath: `inset(0 ${distance}px 0 0 round 28px)`, offset: .32 },
+        { clipPath: `inset(0 ${distance}px 0 0 round 28px)`, offset: .64, easing: 'cubic-bezier(.45,0,.2,1)' },
         { clipPath: 'inset(0 0px 0 0 round 28px)', offset: 1 }
       ], timing),
       toggle.animate([
-        { opacity: 1, offset: 0 }, { opacity: 0, offset: .25 },
-        { opacity: 0, offset: .75 }, { opacity: 1, offset: 1 }
-      ], timing)
+        { opacity: 1, offset: 0 }, { opacity: 0, offset: .18 },
+        { opacity: 0, offset: .82 }, { opacity: 1, offset: 1 }
+      ], timing),
+      shine.animate([
+        { transform: 'translateX(-150%) skewX(-22deg)', opacity: 0 },
+        { transform: 'translateX(-80%) skewX(-22deg)', opacity: .65, offset: .2 },
+        { transform: 'translateX(550%) skewX(-22deg)', opacity: .65, offset: .8 },
+        { transform: 'translateX(650%) skewX(-22deg)', opacity: 0 }
+      ], { duration: 1050, delay: 2100, easing: 'ease-in-out', iterations: 1 })
     ];
   }, 5000);
 }
