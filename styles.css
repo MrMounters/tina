@@ -43,3 +43,9 @@
 .footer-socials{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:640px}.footer-socials a{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;white-space:nowrap}
 @media(max-width:700px){.footer-socials{width:100%;max-width:none;gap:4px}.footer-socials a{flex-direction:column;gap:8px;padding:8px 0;min-height:76px;font-size:14px;line-height:1.4}.footer-socials .channel-icon{width:28px;height:28px}}
 @media(max-width:359px){.footer-socials a{font-size:13px}}
+
+.contact-dock button.peel-face{font-family:var(--font);line-height:1.5;border:0;text-align:left;cursor:pointer}.contact-dock button.peel-face:focus-visible{outline:3px solid var(--brass);outline-offset:-5px}
+
+@media(min-width:701px){.contact-dock>.messaging-peel.is-open{width:288px;flex-basis:288px;min-width:288px}}
+
+.messaging-peel.is-open .peel-face{transform:translateX(-100%);box-shadow:none}.contact-dock .peel-face,.contact-dock .peel-toggle,.contact-dock .channel-link{-webkit-tap-highlight-color:transparent}.contact-dock .channel-link:focus-visible{outline:2px solid var(--brass);outline-offset:-2px}

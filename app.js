@@ -155,15 +155,20 @@ if (peel) {
     toggle.setAttribute('aria-label', open ? 'Hide messaging options' : 'Show messaging options');
     tray.inert = !open;
     tray.setAttribute('aria-hidden', String(!open));
+    face.setAttribute('aria-expanded', String(open));
     face.inert = open;
     requestAnimationFrame(() => peel.dispatchEvent(new Event('contactlayoutchange', { bubbles: true })));
   };
+  face.addEventListener('click', () => {
+    setOpen(true);
+    requestAnimationFrame(() => tray.querySelector('a[href]')?.focus({ preventScroll: true }));
+  });
   toggle.addEventListener('click', () => setOpen(!peel.classList.contains('is-open')));
   peel.addEventListener('keydown', event => {
     if (event.key === 'Escape' && peel.classList.contains('is-open')) {
       event.preventDefault();
       setOpen(false);
-      toggle.focus();
+      face.focus();
     }
   });
   peel.addEventListener('pointerenter', stopPeek);
@@ -219,3 +224,9 @@ if (intakeInfo && intakeTip) {
   intakeInfo.addEventListener('keydown', event => { if (event.key === 'Escape') showTip(false); });
   document.addEventListener('pointerdown', event => { if (!event.target.closest('.intake-link-group')) showTip(false); });
 }
+
+// Older iPhone Messages links use &body; retain each link's existing draft text.
+const iosMessages = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+if (iosMessages) document.querySelectorAll('a[href^="sms:"]').forEach(link => {
+  link.setAttribute('href', link.getAttribute('href').replace('?body=', '&body='));
+});

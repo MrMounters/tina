@@ -55,3 +55,10 @@ Validation for the map update: Chromium at 320, 390 and 1440px loaded the real G
 The edge reveal now lasts 2400ms, retaining the five-second start cadence. Its cover opens gently, holds, then closes; a restrained 1050ms shine begins 2100ms into the cycle. The label stays still. Preview icons are 22px with 12px separation and more inset from the edge. Very narrow screens show one preview mark so the Text Christina label has room; manual opening still exposes all four messaging links with at least 44px targets. Both peek and shine stop for reduced motion, hidden/offscreen controls and user interaction.
 
 Verification: touch open/close followed by recurring five-second peeks; 2.4-second reveal; visible closing shine; measured preview clearance and opaque preview backing; six badge icons and supplied number; confirmation note; all four open-tray targets at least 44px and within the viewport at 320, 390, 768 and 1440px; reduced-motion disables both automatic effects.
+
+
+## Whole-button chooser and friendly Messages draft
+
+The floating Text Christina cover is now a real button. Tapping or using Enter/Space opens the four messaging choices without leaving the page. Focus moves to the first channel; Escape closes the tray and restores focus to the main button. The chevron also toggles the options. Selecting Messages is the separate action that opens the native composer. The five-second peek and closing shine remain. Desktop open-tray width now accommodates all four minimum-44px channel targets without clipping. Without JavaScript, the inactive floating chooser is hidden; the direct Call and on-page Messages links remain available.
+
+General Messages links are prefilled with “Hey Christina, I need to know more about your services, girl!” The 22 contextual service drafts and new-client inquiry retain their specific collected content. iPhone/iPad links use the older iOS &body= convention; default/Android links use ?body=. Physical messaging apps were not exercised and no real message was sent.

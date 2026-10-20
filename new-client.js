@@ -1,3 +1,6 @@
+const iosMessages = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const smsBodySeparator = iosMessages ? '&body=' : '?body=';
+if (iosMessages) document.querySelectorAll('a[href^="sms:"]').forEach(link => link.setAttribute('href', link.getAttribute('href').replace('?body=', '&body=')));
 const form = document.querySelector('#new-client-form');
 const panels = [...form.querySelectorAll('[data-panel]')];
 const navigation = form.querySelector('.intake-navigation');
@@ -67,7 +70,7 @@ function buildReview() {
   if (referral) draft += `\nFound you through: ${referral}`;
   draft += `\nStudio news and offers: ${updates ? 'Yes, I would like occasional updates.' : 'Not requested.'}`;
   const whatsapp = reply === 'WhatsApp';
-  send.href = whatsapp ? `https://wa.me/16027063400?text=${encodeURIComponent(draft)}` : `sms:+16027063400?body=${encodeURIComponent(draft)}`;
+  send.href = whatsapp ? `https://wa.me/16027063400?text=${encodeURIComponent(draft)}` : `sms:+16027063400${smsBodySeparator}${encodeURIComponent(draft)}`;
   send.firstChild.textContent = whatsapp ? 'Open WhatsApp draft ' : 'Open text draft ';
   if (whatsapp) { send.target = '_blank'; send.rel = 'noopener'; }
   else { send.removeAttribute('target'); send.removeAttribute('rel'); }
