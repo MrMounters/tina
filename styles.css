@@ -1,6 +1,9 @@
 @font-face{font-family:"DM Sans";font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/dm-sans-regular.woff") format("woff")}
 @font-face{font-family:"DM Sans";font-style:normal;font-weight:600;font-display:swap;src:url("assets/fonts/dm-sans-semibold.woff") format("woff")}
 @font-face{font-family:Italiana;font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/italiana.woff") format("woff")}
+/* Italiana has one native weight. Reinforce its fine strokes without changing
+   the approved letterforms, spacing or line breaks, including intake titles. */
+h1,h2,h3,h4,h5,h6,.intake-panel legend{-webkit-text-stroke:.35px currentColor}
 /* A compact service grid, with an enhanced category selector. */
 .treatment-menu{margin-top:32px}
 .treatment-filters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;padding:8px;background:var(--field);border-radius:12px}
