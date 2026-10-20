@@ -66,19 +66,37 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'Intersect
   items.forEach(item => reveal.observe(item));
 }
 
-// Each bubble is revealed once. This is an entrance, never an endless bobbing loop.
+// Each specialty gets its own small pop, 600ms apart, once the portrait is visible.
+// Paused first frames prevent the labels flashing before their turn.
 const portrait = document.querySelector('.portrait');
-if (portrait && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const bubbleArrival = new IntersectionObserver(entries => {
+const bubbleMotion = matchMedia('(prefers-reduced-motion: reduce)');
+if (portrait && 'IntersectionObserver' in window && !bubbleMotion.matches) {
+  const arrivals = [...portrait.querySelectorAll('.treatment-bubble')].map((bubble, index) => {
+    const animation = bubble.animate([
+      { opacity: 0, transform: 'translateY(8px) scale(.78)', offset: 0 },
+      { opacity: 1, transform: 'translateY(0) scale(1.035)', offset: .72 },
+      { opacity: 1, transform: 'translateY(0) scale(1)', offset: 1 }
+    ], { duration: 440, delay: 150 + index * 600, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' });
+    animation.pause();
+    animation.currentTime = 0;
+    return animation;
+  });
+  const bubbleArrival = new IntersectionObserver(async entries => {
     if (!entries.some(entry => entry.isIntersecting)) return;
-    portrait.querySelectorAll('.treatment-bubble').forEach((bubble, index) => {
-      bubble.animate([
-        { opacity: 0, transform: 'translateY(14px) scale(.94)' },
-        { opacity: 1, transform: 'translateY(0) scale(1)' }
-      ], { duration: 700, delay: 350 + index * 180, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
-    });
     bubbleArrival.disconnect();
+    try { await portrait.querySelector('img').decode(); } catch { /* Labels remain useful if the photo fails. */ }
+    arrivals.forEach(animation => {
+      if (bubbleMotion.matches) { animation.cancel(); return; }
+      animation.play();
+      animation.finished.then(() => animation.cancel()).catch(() => {});
+    });
   }, { threshold: .3 });
+  bubbleMotion.addEventListener('change', () => {
+    if (bubbleMotion.matches) {
+      bubbleArrival.disconnect();
+      arrivals.forEach(animation => animation.cancel());
+    }
+  });
   bubbleArrival.observe(portrait);
 }
 

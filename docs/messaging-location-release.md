@@ -2,6 +2,10 @@
 
 20 October 2026. Preserves the previous visual refinement and implements the requested additions.
 
+## Portrait service bubbles
+
+Each label now pops from 78% scale to a subtle 103.5% settle, then rests at full size. The labels arrive 600ms apart after the portrait enters view and its image has decoded. Each pop takes 440ms; the full sequence finishes in under two seconds. Paused initial frames prevent all labels flashing before their turn. With reduced motion they are immediately visible and static.
+
 ## Current motion correction
 
 The hero is a normal direct Text Christina link again. Only the floating control nudges 16px sideways and returns over 850ms, every five seconds while visible and idle. It never automatically opens the options. Tap the chevron to open them; Escape closes them. Peeking pauses for reduced motion, hidden tabs, hidden/offscreen controls, pointer hover, keyboard focus and an open tray. The portrait bubbles retain their one-time arrivals.
