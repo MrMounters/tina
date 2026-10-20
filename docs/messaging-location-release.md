@@ -2,9 +2,11 @@
 
 20 October 2026. Preserves the previous visual refinement and implements the requested additions.
 
-## Portrait service bubbles
+## Portrait service bubbles — mobile visibility fix
 
-Each label now pops from 78% scale to a subtle 103.5% settle, then rests at full size. The labels arrive 600ms apart after the portrait enters view and its image has decoded. Each pop takes 440ms; the full sequence finishes in under two seconds. Paused initial frames prevent all labels flashing before their turn. With reduced motion they are immediately visible and static.
+A short-screen production check reproduced the issue: at 390×667, lower labels at y=737 and y=784 had already completed their animations before they entered the viewport. The portrait-level observer triggered them too early. The earlier test forced animation times and did not cover the natural short-screen scroll path.
+
+Each bubble is now observed separately and waits until it is fully within the viewport, with a 48px bottom inset. Visible labels retain 600ms separation, the 440ms pop and the small settling scale. Lower labels stay waiting until scrolled into view. Reduced motion keeps all labels visible immediately. The script URL is versioned so the corrected code is fetched on page reload.
 
 ## Current motion correction
 

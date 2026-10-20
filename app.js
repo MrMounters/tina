@@ -66,38 +66,53 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'Intersect
   items.forEach(item => reveal.observe(item));
 }
 
-// Each specialty gets its own small pop, 600ms apart, once the portrait is visible.
-// Paused first frames prevent the labels flashing before their turn.
+// On phones, each label waits until it is actually in view; the portrait alone
+// must not start lower labels while they are still beneath the screen.
 const portrait = document.querySelector('.portrait');
 const bubbleMotion = matchMedia('(prefers-reduced-motion: reduce)');
 if (portrait && 'IntersectionObserver' in window && !bubbleMotion.matches) {
-  const arrivals = [...portrait.querySelectorAll('.treatment-bubble')].map((bubble, index) => {
+  const bubbles = [...portrait.querySelectorAll('.treatment-bubble')];
+  const visible = new Set();
+  const started = new Set();
+  let nextPopAt = 0;
+  const arrivals = new Map(bubbles.map(bubble => {
     const animation = bubble.animate([
       { opacity: 0, transform: 'translateY(8px) scale(.78)', offset: 0 },
       { opacity: 1, transform: 'translateY(0) scale(1.035)', offset: .72 },
       { opacity: 1, transform: 'translateY(0) scale(1)', offset: 1 }
-    ], { duration: 440, delay: 150 + index * 600, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' });
+    ], { duration: 440, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both' });
     animation.pause();
     animation.currentTime = 0;
-    return animation;
-  });
+    return [bubble, animation];
+  }));
+  const imageReady = portrait.querySelector('img').decode().catch(() => {});
   const bubbleArrival = new IntersectionObserver(async entries => {
-    if (!entries.some(entry => entry.isIntersecting)) return;
-    bubbleArrival.disconnect();
-    try { await portrait.querySelector('img').decode(); } catch { /* Labels remain useful if the photo fails. */ }
-    arrivals.forEach(animation => {
-      if (bubbleMotion.matches) { animation.cancel(); return; }
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= .99) visible.add(entry.target);
+      else visible.delete(entry.target);
+    });
+    await imageReady;
+    if (bubbleMotion.matches) return;
+    bubbles.forEach(bubble => {
+      if (!visible.has(bubble) || started.has(bubble)) return;
+      const now = performance.now();
+      const delay = Math.max(150, nextPopAt - now);
+      nextPopAt = now + delay + 600;
+      const animation = arrivals.get(bubble);
+      animation.effect.updateTiming({ delay });
       animation.play();
+      started.add(bubble);
+      bubbleArrival.unobserve(bubble);
       animation.finished.then(() => animation.cancel()).catch(() => {});
     });
-  }, { threshold: .3 });
+  }, { threshold: .99, rootMargin: '0px 0px -48px 0px' });
   bubbleMotion.addEventListener('change', () => {
     if (bubbleMotion.matches) {
       bubbleArrival.disconnect();
       arrivals.forEach(animation => animation.cancel());
     }
   });
-  bubbleArrival.observe(portrait);
+  bubbles.forEach(bubble => bubbleArrival.observe(bubble));
 }
 
 // External profiles stay absent until a real account URL is supplied.
