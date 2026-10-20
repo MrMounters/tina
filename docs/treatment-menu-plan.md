@@ -1,5 +1,11 @@
 # Treatment menu: plan and implementation
 
+## Current revision: service grid
+
+At the client's request, the treatment table and every repeated Ask link have been removed. The current layout is a semantic list grid: two columns on phones, three on tablets and four on desktop, grouped under the existing category headings. Each tile contains its original line icon and service name. Tiles are informational; the floating contact control and new-client form remain the shared ways to inquire. All 22 services, category filters, announced counts, incoming fragment links, no-JavaScript visibility and reduced-motion behavior remain.
+
+Checked at 320, 375, 768 and 1440px for grid columns, complete content, category counts, no horizontal overflow and no JavaScript errors. Mobile and desktop captures reviewed. Earlier table-specific implementation notes below describe the superseded version.
+
 ## Direction
 
 Expand the existing ivory, ink and brass visual system into a treatment ledger. Preserve the original portrait, hero, client work, messaging chooser and studio information. The original 22 service names and individual inquiry drafts are the source of truth; no prices, treatment times, outcomes or credentials are invented.

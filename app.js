@@ -5,7 +5,7 @@ if (year) year.textContent = String(new Date().getFullYear());
 const dock = document.querySelector('.contact-dock');
 const contact = document.querySelector('#contact');
 if (dock && contact) {
-  const protectedContent = [...document.querySelectorAll('h1,h2,.button,summary,.services a,.treatment-inquiry,.treatment-filters button,.service-help a')].filter(node => !dock.contains(node));
+  const protectedContent = [...document.querySelectorAll('h1,h2,.button,summary,.services a,.treatment-category-heading,.treatment-filters button,.service-help a')].filter(node => !dock.contains(node));
   let dockBounds;
   let queued = false;
   function measureDock() {
@@ -48,11 +48,10 @@ if (treatmentMenu) {
   const groups = [...treatmentMenu.querySelectorAll('[data-service-group]')];
   const status = treatmentMenu.querySelector('#treatment-count');
   const chooseCategory = category => {
-    treatmentMenu.querySelector('table').classList.toggle('is-filtered', category !== 'all');
     let count = 0;
     groups.forEach(group => {
       group.hidden = category !== 'all' && group.dataset.serviceGroup !== category;
-      if (!group.hidden) count += group.querySelectorAll('.treatment-row').length;
+      if (!group.hidden) count += group.querySelectorAll('.treatment-card').length;
     });
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.serviceFilter === category)));
     status.textContent = `${count} treatments${category === 'all' ? '' : ` · ${buttons.find(button => button.dataset.serviceFilter === category).textContent}`}`;
