@@ -7,6 +7,8 @@ h1,h2,h3,h4,h5,h6,.intake-panel legend{-webkit-text-stroke:.35px currentColor}
 .credential-verify{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:4px;color:var(--brass);font-size:var(--small);line-height:1.4;text-decoration:underline;text-underline-offset:4px}
 .credential-verify .icon{width:14px;height:14px}
 .credential-verify:hover{text-decoration-thickness:2px}
+.credential-badges li>div{display:flex;flex:1;flex-direction:column;min-width:0;align-self:stretch}
+.credential-badges .credential-verify{align-self:flex-start;margin-top:auto;padding-block:10px}
 /* A compact service grid, with an enhanced category selector. */
 .treatment-menu{margin-top:32px}
 .treatment-filters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;padding:8px;background:var(--field);border-radius:12px}
@@ -92,3 +94,10 @@ h1,h2,h3,h4,h5,h6,.intake-panel legend{-webkit-text-stroke:.35px currentColor}
 @media(min-width:701px){.contact-dock>.messaging-peel.is-open{width:288px;flex-basis:288px;min-width:288px}}
 
 .messaging-peel.is-open .peel-face{transform:translateX(-100%);box-shadow:none}.contact-dock .peel-face,.contact-dock .peel-toggle,.contact-dock .channel-link{-webkit-tap-highlight-color:transparent}.contact-dock .channel-link:focus-visible{outline:2px solid var(--brass);outline-offset:-2px}
+
+/* Consistent icon gutters and top alignment for the studio information. */
+.studio-details{align-items:start}
+.studio-details>.studio-detail{display:flex;flex-direction:column;justify-content:flex-start;gap:6px;min-width:0;min-height:60px}
+.footer-detail-heading{display:flex;align-items:center;gap:10px}
+.studio-detail-icon{display:block;flex-shrink:0;width:18px;height:18px;fill:none;stroke:var(--brass);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.studio-details .footer-detail-copy{margin-left:28px}
