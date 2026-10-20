@@ -1,23 +1,65 @@
-const groups = [
- ['Brows','Shape & definition',['Microblading Tattoo','Powder Brow Tattoo','Ombre Brow Tattoo','Combo Brow Tattoo']],
- ['Cosmetic tattoos & details','Your finishing touches',['Lip Blush Tattoo','Lip Liner Tattoo','Freckle on Face Tattoo','Tiny Tattoos','Ear Piercings','Tooth Gems']],
- ['Restorative tattooing','Thoughtful, personal care',['Paramedical Tattoos','Corrective Surgery Scar Tattoos','Areola Breast Tattoo','Scar Camouflage Tattoo','Surgery Scar Camo Tattoo','Sal Tattoo Removal']],
- ['Skin','Care beyond the surface',['Microneedling Facial','Skincare Products','Skincare Analysis']],
- ['Mindful movement','Space to reconnect',['Yoga Vinyasa Classes','Meditation Classes','Sound Healing Classes']]
-];
-const list = document.querySelector('#service-list');
-groups.forEach(([name,desc,services],i) => {
- const detail = document.createElement('details');
- const summary = document.createElement('summary');
- summary.innerHTML = `<span class="number">0${i+1}</span><span class="category">${name}</span><span class="desc">${desc}</span><span class="plus" aria-hidden="true">+</span>`;
- const ul=document.createElement('ul'); ul.className='services';
- services.forEach(service=>{const li=document.createElement('li');const a=document.createElement('a');a.href='#consultation';a.textContent=service;a.addEventListener('click',e=>{e.preventDefault();openBooking(name,a)});li.append(a);ul.append(li)});
- detail.append(summary,ul);list.append(detail);
+const year = document.querySelector('#year');
+if (year) year.textContent = String(new Date().getFullYear());
+
+// Contact links work without JavaScript. Nothing is sent from this website.
+const dock = document.querySelector('.contact-dock');
+const contact = document.querySelector('#contact');
+if (dock && contact) {
+  const protectedContent = [...document.querySelectorAll('h1,h2,.button,summary,.services a')];
+  let dockBounds;
+  let queued = false;
+  function measureDock() {
+    const wasHidden = dock.hidden;
+    dock.hidden = false;
+    dockBounds = dock.getBoundingClientRect();
+    dock.hidden = wasHidden;
+    updateDock();
+  }
+  function updateDock() {
+    queued = false;
+    if (dock.contains(document.activeElement) || !dockBounds) return;
+    const contactBox = contact.getBoundingClientRect();
+    const contactVisible = contactBox.top < innerHeight * 0.8 && contactBox.bottom > 0;
+    const collision = protectedContent.some(node => {
+      const r = node.getBoundingClientRect();
+      return r.width > 0 && r.height > 0 && r.top < dockBounds.bottom + 8 &&
+        r.bottom > dockBounds.top - 8 && r.left < dockBounds.right && r.right > dockBounds.left;
+    });
+    dock.hidden = contactVisible || collision;
+  }
+  function scheduleUpdate() {
+    if (!queued) { queued = true; requestAnimationFrame(updateDock); }
+  }
+  measureDock();
+  addEventListener('scroll', scheduleUpdate, { passive: true });
+  addEventListener('resize', measureDock);
+  document.addEventListener('toggle', scheduleUpdate, true);
+  document.fonts?.ready.then(measureDock);
+}
+
+// Keep keyboard focus above the fixed contact controls.
+document.addEventListener('focusin', event => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement) || !dock || dock.hidden || dock.contains(target)) return;
+  const box = target.getBoundingClientRect();
+  const dockBox = dock.getBoundingClientRect();
+  if (box.bottom > dockBox.top && box.top < dockBox.bottom) {
+    target.scrollIntoView({ block: 'center', behavior: 'instant' });
+  }
 });
-const dialog=document.querySelector('#booking');let opener;
-function openBooking(interest,source){opener=source;document.querySelector('#interest').value=interest||'Help choosing a treatment';dialog.showModal()}
-document.querySelectorAll('[data-book]').forEach(button=>button.addEventListener('click',()=>openBooking(null,button)));
-document.querySelector('.close').addEventListener('click',()=>dialog.close());
-dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});
-dialog.addEventListener('close',()=>opener?.focus());
-document.querySelector('#year').textContent=new Date().getFullYear();
+
+// A short arrival sequence, then a staggered reveal of the actual client work.
+// Everything is visible by default, including with JavaScript disabled.
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+  const items = [...document.querySelectorAll('[data-reveal]')];
+  const reveal = new IntersectionObserver(entries => {
+    entries.filter(entry => entry.isIntersecting).forEach((entry, index) => {
+      entry.target.animate(
+        [{ transform: 'translateY(12px)', opacity: 0.88 }, { transform: 'translateY(0)', opacity: 1 }],
+        { duration: 620, delay: Math.min(index, 3) * 70, easing: 'cubic-bezier(.16,1,.3,1)' }
+      );
+      reveal.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+  items.forEach(item => reveal.observe(item));
+}

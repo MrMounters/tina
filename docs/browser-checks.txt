@@ -1,0 +1,6 @@
+{"width": 320, "services": 22, "gallery": 4, "portrait": {"loaded": true, "fit": "contain", "top": 16, "src": "http://127.0.0.1:8081/assets/christina-480.webp"}, "targets": "44px minimum passed", "contact": "tap and destinations passed", "overflow": false, "consoleErrors": []}
+{"width": 390, "services": 22, "gallery": 4, "portrait": {"loaded": true, "fit": "contain", "top": 16, "src": "http://127.0.0.1:8081/assets/christina-480.webp"}, "targets": "44px minimum passed", "contact": "tap and destinations passed", "overflow": false, "consoleErrors": []}
+{"width": 768, "services": 22, "gallery": 4, "portrait": {"loaded": true, "fit": "contain", "top": 20, "src": "http://127.0.0.1:8081/assets/christina-480.webp"}, "targets": "44px minimum passed", "contact": "tap and destinations passed", "overflow": false, "consoleErrors": []}
+{"width": 1440, "services": 22, "gallery": 4, "portrait": {"loaded": true, "fit": "contain", "top": 20, "src": "http://127.0.0.1:8081/assets/christina-960.webp"}, "targets": "44px minimum passed", "contact": "tap and destinations passed", "overflow": false, "consoleErrors": []}
+200% CSS zoom: no horizontal overflow
+JavaScript disabled: all treatments and contact links remain available; details works

@@ -1,0 +1,38 @@
+TASTESKILL · INSPECT   http://127.0.0.1:8081
+
+MEASURED (first viewport listed)
+  hero headline   "Beauty, with you in mind."  5 words · 2 line(s) · 89.3px (6.2vw) · Italiana 400 · tracking -0.025em · leading 1.05
+  @768px          2 line(s) · 56px
+  @390px          2 line(s) · 50.7px
+  typefaces       DM Sans 92%, Italiana 8%
+  sizes in use    14 / 16 / 20 / 28 / 56 / 89 px   body 20px / 1.5
+  colour          page #f4f0e9 · sections #282a23 #e9e4da · button #25251f
+  page            3.6 screens · 148 words · 5 images · hero media 47% img
+  headings        6 · longest 2 line(s) · median 4 words
+
+FAIL — fix every one of these
+  [still-page] @1440px  Only 4 element(s) moved while the page loaded and scrolled.
+      → Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback.
+  [eyebrow] @390px  1 eyebrow/kicker label(s) above headings: "Sound Healing Classes" above "Meet Christina."
+      → Delete them. If the label carried real information, fold it into the headline or the supporting sentence.
+
+WARN — fix, or be able to defend
+  [mixed-font-headline] @1440px (+768, 390)  2 headline(s) switch typeface or to italic mid-line (the "one italic serif word" move).
+      → Set the whole headline in one face. Emphasis comes from the words.
+  [palette-cream] @1440px (+768, 390)  Yellow-cream background (page background #f4f0e9, section #e9e4da, text #f4f0e9).
+      → Use the drawn palette. If you want warmth, take a low-chroma stone or bone, not a yellow cream.
+  [no-footage] @1440px  No video anywhere on the page.
+      → Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject.
+  [off-centre] @1440px  The margins differ: 80px on the left, 56px on the right, at 1440px.
+      → Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page.
+
+LOOK AT THE RENDER — open these with your image viewer / Read tool before saying anything about quality:
+  desktop 1440px  .taste-skill/inspect/desktop-fold.jpg
+                  .taste-skill/inspect/desktop-page-01.jpg
+  tablet 768px    .taste-skill/inspect/tablet-fold.jpg
+                  .taste-skill/inspect/tablet-page-01.jpg
+  mobile 390px    .taste-skill/inspect/mobile-fold.jpg
+                  .taste-skill/inspect/mobile-page-01.jpg
+
+report: .taste-skill/inspect/report.json
+RESULT: 2 FAIL, 4 WARN — not done.

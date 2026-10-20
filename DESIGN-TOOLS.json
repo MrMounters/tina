@@ -1,0 +1,18 @@
+[
+  {
+    "name": "design-taste-frontend",
+    "source": "https://github.com/Leonxlnx/taste-skill",
+    "version": "588d11adcac1713519e8a38f8517601e93fb6251",
+    "scope": "project",
+    "path": "/workspace/tina-review/.agents/skills/design-taste-frontend/SKILL.md",
+    "automatic_hooks": false
+  },
+  {
+    "name": "impeccable",
+    "source": "https://github.com/pbakaus/impeccable",
+    "version": "4.7.0; engine 0.1.16",
+    "scope": "project",
+    "path": "/workspace/tina-review/.agents/skills/impeccable/SKILL.md",
+    "automatic_hooks": false
+  }
+]

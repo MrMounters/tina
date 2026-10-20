@@ -1,21 +1,27 @@
-# Elevated Ink & Aesthetics · V2
+# Elevated Ink & Aesthetics
 
-Mobile-first editorial redesign. Static HTML, CSS, and JavaScript; no build or dependencies.
+Mobile-first website for Christina’s permanent makeup, restorative tattooing, skincare and wellness services in Scottsdale. Static HTML, CSS and JavaScript, with no install or build step.
 
-## Preview
+## Run locally
 
-Run `python3 -m http.server 8080` in this directory, then open http://localhost:8080.
+```sh
+python3 -m http.server 8080
+```
 
-## Included
+Open http://localhost:8080.
 
-- Original uploaded Christina portrait and client screenshot, unmodified. CSS frames individual paired treatment images without changing the source or inventing results.
-- Responsive layouts, collapsible categories containing all 22 supplied services, accessible consultation dialog, fixed booking CTA, reduced-motion support.
-- Google search pill, with no unverified rating or review count.
+## Contact behavior
 
-## Before production
+Call and Text use **+1 (602) 706-3400**. Treatment links open an SMS draft with the service name. The visitor chooses whether to send it from their messaging app. The website does not collect personal data, send messages, or confirm appointments.
 
-Replace the Google search URL with the studio’s verified Google Business Profile review link. Replace the consultation dialog’s destination with the studio’s verified scheduling URL. Currently it clearly hands visitors to the existing studio website and does not submit an enquiry or confirm an appointment. The interest selection is not transmitted.
+The Google badge links to the supplied business link. The displayed **5.0 / 26 reviews** is a static snapshot, not an automatically synchronized feed.
 
-Fonts load from Google Fonts with local system fallbacks. Assets are supplied by the user; retain the studio’s permission to publish client photography. Original treatment names are retained apart from correcting “Camofloge” to “Camouflage”. Confirm “Sal Tattoo Removal” with the studio.
+## Assets
 
-This version is prepared for GitHub; publishing requires a destination repository. No backend, tracking, or personal data collection is included.
+The supplied portrait has a transparent PNG fallback and responsive transparent WebP renditions. Client treatment pairs are displayed as CSS-framed views of the original uploaded screenshot, with no results retouching. Google Fonts DM Sans and Italiana are subsetted and self-hosted; licenses are in assets/fonts.
+
+## Design verification
+
+See [the original audit](docs/design-audit.md) and [implementation results, evidence and remaining intentional exceptions](docs/refinement-results.md).
+
+The Taste and Impeccable skills were installed in the project workspace and used for this pass. DESIGN-TOOLS.json records their upstream versions. Skill engines and generated screenshots are workspace tooling, not part of the public site's runtime.
