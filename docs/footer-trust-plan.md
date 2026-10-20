@@ -1,4 +1,4 @@
-# Footer trust plan and client demonstration
+# Footer trust plan — current presentation
 
 The footer should help a prospective client decide whether to contact Christina. Preserve the existing ivory, ink and brass design, with a quiet evidence row above the footer navigation. Mobile stacks the evidence into readable lines; no extra carousel, auto animation, or decorative award seals.
 
@@ -27,11 +27,8 @@ Christina’s full licensed name and license number; year she began each claimed
 
 Official verification: https://bcb.az.gov/resources/license-verification
 
-## Authorized client demo
+## Current public footer
 
-At the user’s explicit request, the footer now presents sample experience of 8+ years, fictional license DEMO-000000, and illustrative training references to PhiAcademy and the American Academy of Micropigmentation. A visible section disclosure and item labels identify the credentials as examples pending verification; the license is explicitly fictional. No completed training or affiliation is claimed. No institutional logos, official-looking seals, chamber membership or brand endorsements were added. The Google rating is the existing supplied snapshot and is not fabricated for this demo.
+The user requested removal of the demo wording. The public page now contains the existing Google rating and count, confirmed Scottsdale studio address, and confirmed contact number. The fictional license, unverified 8+ years claim, and sample training affiliations were removed along with the demo disclosures. Actual professional credentials can be added once supplied and checked.
 
-Replace the demo values with verified details and remove the demo disclosures only after checking those details. Instagram and Messenger remain pending the next user prompt.
-
-
-Validation: checked the rendered sample footer at 320, 390, 768 and 1440px. No horizontal overflow; fictional-number and demo disclosures remain visible; Google review and official Arizona lookup links are present. Mobile and desktop screenshots were reviewed.
+The studio portrait has neutral descriptive alt text and no visible concept caption. Its generated provenance remains documented internally in messaging-location-release.md. Social account URLs are still pending the next prompt.

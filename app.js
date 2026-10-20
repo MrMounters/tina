@@ -100,14 +100,22 @@ fetch('contact-config.json').then(response => {
   }
 }).catch(() => { /* Direct text and WhatsApp are already in the HTML. */ });
 
-const peels = [...document.querySelectorAll('.messaging-peel')];
-peels.forEach(peel => {
+// Only the floating control peeks: a 16px hint, then back, every five seconds.
+// Messaging options open only on request; a peek never changes focus or semantics.
+const peel = document.querySelector('.contact-dock .messaging-peel');
+if (peel) {
   peel.classList.add('is-ready');
   const toggle = peel.querySelector('.peel-toggle');
   const tray = peel.querySelector('.messaging-tray');
   const face = peel.querySelector('.peel-face');
-  let userInteracted = false;
+  const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+  let peekAnimations = [];
+  const stopPeek = () => {
+    peekAnimations.forEach(animation => animation.cancel());
+    peekAnimations = [];
+  };
   const setOpen = open => {
+    stopPeek();
     peel.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Hide messaging options' : 'Show messaging options');
@@ -116,26 +124,36 @@ peels.forEach(peel => {
     face.inert = open;
     requestAnimationFrame(() => peel.dispatchEvent(new Event('contactlayoutchange', { bubbles: true })));
   };
-  toggle.addEventListener('click', () => {
-    userInteracted = true;
-    setOpen(!peel.classList.contains('is-open'));
-  });
+  toggle.addEventListener('click', () => setOpen(!peel.classList.contains('is-open')));
   peel.addEventListener('keydown', event => {
     if (event.key === 'Escape' && peel.classList.contains('is-open')) {
       event.preventDefault();
-      userInteracted = true;
       setOpen(false);
       toggle.focus();
     }
   });
-  if ('IntersectionObserver' in window) {
-    const startOnce = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return;
-      startOnce.disconnect();
-      setTimeout(() => {
-        if (!userInteracted && !peel.contains(document.activeElement) && !peel.closest('.contact-dock')?.contains(document.activeElement)) setOpen(true);
-      }, 3500);
-    }, { threshold: .7 });
-    startOnce.observe(peel);
-  }
-});
+  peel.addEventListener('pointerenter', stopPeek);
+  peel.addEventListener('pointerdown', stopPeek);
+  peel.addEventListener('focusin', stopPeek);
+  motionPreference.addEventListener('change', stopPeek);
+  document.addEventListener('visibilitychange', stopPeek);
+  // A recurring nudge is explicitly requested, but never runs offscreen or at rest
+  // under a pointer, keyboard focus, a reduced-motion preference, or an open tray.
+  setInterval(() => {
+    stopPeek();
+    if (motionPreference.matches || document.hidden || dock.hidden ||
+        peel.classList.contains('is-open') || dock.contains(document.activeElement) ||
+        peel.matches(':hover') || !peel.getClientRects().length) return;
+    const bounds = peel.getBoundingClientRect();
+    if (bounds.bottom <= 0 || bounds.top >= innerHeight) return;
+    const keyframes = [
+      { transform: 'translateX(0)', offset: 0 },
+      { transform: 'translateX(-16px)', offset: .42 },
+      { transform: 'translateX(-16px)', offset: .58 },
+      { transform: 'translateX(0)', offset: 1 }
+    ];
+    peekAnimations = [face, toggle].map(node => node.animate(keyframes, {
+      duration: 850, easing: 'ease-in-out', iterations: 1
+    }));
+  }, 5000);
+}

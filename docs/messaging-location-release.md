@@ -2,6 +2,14 @@
 
 20 October 2026. Preserves the previous visual refinement and implements the requested additions.
 
+## Current motion correction
+
+The hero is a normal direct Text Christina link again. Only the floating control nudges 16px sideways and returns over 850ms, every five seconds while visible and idle. It never automatically opens the options. Tap the chevron to open them; Escape closes them. Peeking pauses for reduced motion, hidden tabs, hidden/offscreen controls, pointer hover, keyboard focus and an open tray. The portrait bubbles retain their one-time arrivals.
+
+Demo footer language and its fictional credentials were removed. The clinic portrait’s visible concept caption was removed at the user’s request; descriptive alt text remains. The image is generated, as recorded below.
+
+The following notes describe the initial release; the correction above supersedes its hero/dock auto-opening and visible portrait-caption behavior.
+
 - Three treatment labels enter once around the original transparent hero portrait, with staggered timing and reduced-motion support.
 - Hero and floating Text Christina controls reveal messaging options after 3.5 seconds of visibility. The face peels 78% across; a toggle and Escape open/close the options. Focused controls are not automatically moved. Direct SMS works without JavaScript.
 - Messages links use the confirmed +1 (602) 706-3400 number. WhatsApp uses that number; an active WhatsApp account has not been independently confirmed. Instagram and Messenger remain hidden until actual account URLs are entered in contact-config.json. No guessed profile URLs are deployed.
