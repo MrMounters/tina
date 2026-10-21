@@ -3,41 +3,25 @@ if (year) year.textContent = String(new Date().getFullYear());
 
 // Contact links work without JavaScript. Nothing is sent from this website.
 const dock = document.querySelector('.contact-dock');
-const contact = document.querySelector('#contact');
-if (dock && contact) {
-  const protectedContent = [...document.querySelectorAll('h1,h2,.button,summary,.services a,.treatment-category-heading,.treatment-filters button,.service-help a,.credential-verify')].filter(node => !dock.contains(node));
-  let dockBounds;
-  let queued = false;
-  function measureDock() {
-    const wasHidden = dock.hidden;
-    dock.hidden = false;
-    dockBounds = dock.getBoundingClientRect();
-    dock.hidden = wasHidden;
-    updateDock();
-  }
-  function updateDock() {
-    queued = false;
-    if (dock.querySelector(':focus-visible') || dock.querySelector('.messaging-peel.is-open') || !dockBounds) return;
-    const contactBox = contact.getBoundingClientRect();
-    const contactVisible = contactBox.top < innerHeight * 0.8 && contactBox.bottom > 0;
-    const collision = protectedContent.some(node => {
-      if (node.closest('[data-service-group][hidden]')) return false;
-      if (node.closest('.services') && !node.closest('details')?.open) return false;
-      const r = node.getBoundingClientRect();
-      return r.width > 0 && r.height > 0 && r.top < dockBounds.bottom + 8 &&
-        r.bottom > dockBounds.top - 8 && r.left < dockBounds.right && r.right > dockBounds.left;
-    });
-    dock.hidden = contactVisible || collision;
-  }
-  function scheduleUpdate() {
-    if (!queued) { queued = true; requestAnimationFrame(updateDock); }
-  }
-  measureDock();
-  addEventListener('scroll', scheduleUpdate, { passive: true });
-  addEventListener('resize', measureDock);
-  document.addEventListener('toggle', scheduleUpdate, true);
-  document.addEventListener('contactlayoutchange', measureDock);
-  document.fonts?.ready.then(measureDock);
+// Keep the fixed CTA mounted while scrolling. Hiding it for every heading or
+// button causes repeated display changes, especially as Safari's toolbar resizes.
+if (dock && window.visualViewport) {
+  const viewport = window.visualViewport;
+  const updateKeyboard = () => {
+    const focused = document.activeElement;
+    const editing = focused instanceof HTMLElement && !dock.contains(focused) &&
+      focused.matches('input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]),textarea,select,[contenteditable="true"]');
+    const keyboardOpen = editing && viewport.scale === 1 &&
+      document.documentElement.clientHeight - viewport.height > 150;
+    dock.toggleAttribute('data-keyboard-hidden', keyboardOpen);
+    dock.inert = keyboardOpen;
+    if (keyboardOpen) dock.setAttribute('aria-hidden', 'true');
+    else dock.removeAttribute('aria-hidden');
+  };
+  viewport.addEventListener('resize', updateKeyboard, { passive: true });
+  document.addEventListener('focusin', updateKeyboard);
+  document.addEventListener('focusout', () => requestAnimationFrame(updateKeyboard));
+  updateKeyboard();
 }
 
 // The complete menu is HTML. Filters enhance it without hiding content on failure.
@@ -84,7 +68,7 @@ if (treatmentMenu) {
 // Keep keyboard focus above the fixed contact controls.
 document.addEventListener('focusin', event => {
   const target = event.target;
-  if (!(target instanceof HTMLElement) || !dock || dock.hidden || dock.contains(target)) return;
+  if (!(target instanceof HTMLElement) || !dock || dock.hidden || dock.inert || dock.contains(target)) return;
   const box = target.getBoundingClientRect();
   const dockBox = dock.getBoundingClientRect();
   if (box.bottom > dockBox.top && box.top < dockBox.bottom) {
@@ -222,7 +206,7 @@ if (peel) {
   // under a pointer, keyboard focus, a reduced-motion preference, or an open tray.
   setInterval(() => {
     stopPeek();
-    if (motionPreference.matches || document.hidden || dock.hidden ||
+    if (motionPreference.matches || document.hidden || dock.hidden || dock.inert ||
         peel.classList.contains('is-open') || dock.querySelector(':focus-visible') ||
         (matchMedia('(hover: hover)').matches && peel.matches(':hover')) || !peel.getClientRects().length) return;
     const bounds = peel.getBoundingClientRect();
