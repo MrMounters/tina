@@ -113,3 +113,5 @@ h1,h2,h3,h4,h5,h6,.intake-panel legend{-webkit-text-stroke:.35px currentColor}
 .maker-credit{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px;min-height:48px;font-size:14px;line-height:1.5;color:var(--muted)}
 .maker-credit>span:last-child{display:flex;align-items:center;gap:5px}.maker-credit strong{font-weight:600;color:var(--ink)}.maker-credit .icon{width:14px;height:14px;color:var(--brass)}.maker-credit:hover strong{text-decoration:underline;text-underline-offset:4px}
 @media(max-width:700px){.footer-signoff{align-items:flex-start;flex-direction:column;gap:12px}.maker-credit{align-items:flex-start}}
+
+.yoga-flows-title{margin:0 0 16px;font-size:18px;font-weight:500}.treatment-description{font-size:.9em;color:var(--muted);line-height:1.4}
